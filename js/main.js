@@ -1,12 +1,12 @@
 /* ========================================================
    UP n WET — Main JS
-   Scroll-triggered fade-in animations via IntersectionObserver
+   Scroll-triggered fade-in/out animations via IntersectionObserver
    ======================================================== */
 
 (function () {
   'use strict';
 
-  // --- Scroll-triggered fade-in ---
+  // --- Scroll-triggered fade-in/out ---
   const fadeElements = document.querySelectorAll('.fade-in');
 
   if ('IntersectionObserver' in window) {
@@ -15,7 +15,8 @@
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            observer.unobserve(entry.target); // animate once
+          } else {
+            entry.target.classList.remove('visible');
           }
         });
       },
