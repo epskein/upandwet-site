@@ -18,7 +18,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Comfortaa', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: #050505;
   color: #f0f0f0;
   line-height: 1.6;
@@ -45,11 +45,13 @@ img {
 
 /* --- Sections (shared) --- */
 .section {
+  position: relative;
+  z-index: 1;
   padding: 100px 0;
 }
 
 .section__heading {
-  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -109,6 +111,7 @@ img {
    ======================================================== */
 .hero {
   position: relative;
+  z-index: 1;
   width: 100%;
   height: 100vh;
   min-height: 600px;
@@ -147,7 +150,7 @@ img {
 }
 
 .hero__logo {
-  width: clamp(240px, 50vw, 480px);
+  width: clamp(280px, 50vw, 560px);
   height: auto;
   filter: drop-shadow(0 4px 30px rgba(0, 0, 0, 0.5));
 }
@@ -198,6 +201,44 @@ img {
   }
   100% {
     top: 100%;
+  }
+}
+
+/* ========================================================
+   AMBIENT GLOW (drifting gradient wash behind content)
+   ======================================================== */
+.ambient-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.12;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 45%, black 70%);
+  mask-image: linear-gradient(to bottom, transparent 45%, black 70%);
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 60%, rgba(140, 160, 255, 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 75% 30%, rgba(255, 255, 255, 0.25) 0%, transparent 55%),
+    radial-gradient(ellipse 90% 40% at 50% 90%, rgba(180, 140, 255, 0.3) 0%, transparent 50%);
+  background-size: 200% 200%;
+  animation: gradientWash 30s ease-in-out infinite;
+  will-change: background-position;
+}
+
+@keyframes gradientWash {
+  0% {
+    background-position: 0% 0%, 100% 100%, 50% 50%;
+  }
+  25% {
+    background-position: 60% 40%, 30% 70%, 80% 20%;
+  }
+  50% {
+    background-position: 100% 80%, 0% 20%, 30% 90%;
+  }
+  75% {
+    background-position: 30% 60%, 70% 50%, 10% 40%;
+  }
+  100% {
+    background-position: 0% 0%, 100% 100%, 50% 50%;
   }
 }
 
@@ -387,6 +428,10 @@ img {
 
   .hero__content {
     bottom: 14%;
+  }
+
+  .hero__logo {
+    width: clamp(320px, 85vw, 480px);
   }
 
   .section {
