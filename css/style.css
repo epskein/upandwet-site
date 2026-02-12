@@ -207,19 +207,25 @@ img {
 /* ========================================================
    AMBIENT GLOW (drifting gradient wash behind content)
    ======================================================== */
+.content-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
 .ambient-glow {
-  position: fixed;
+  position: absolute;
   inset: 0;
-  z-index: 0;
   pointer-events: none;
   opacity: 0.12;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 45%, black 70%);
-  mask-image: linear-gradient(to bottom, transparent 45%, black 70%);
+  /* Fade from black at top so it blends perfectly with hero */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 250px);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 250px);
   background:
     radial-gradient(ellipse 80% 50% at 20% 60%, rgba(140, 160, 255, 0.4) 0%, transparent 60%),
     radial-gradient(ellipse 60% 80% at 75% 30%, rgba(255, 255, 255, 0.25) 0%, transparent 55%),
     radial-gradient(ellipse 90% 40% at 50% 90%, rgba(180, 140, 255, 0.3) 0%, transparent 50%);
   background-size: 200% 200%;
+  background-attachment: fixed;
   animation: gradientWash 30s ease-in-out infinite;
   will-change: background-position;
 }
@@ -431,7 +437,8 @@ img {
   }
 
   .hero__logo {
-    width: clamp(320px, 85vw, 480px);
+    width: 95vw;
+    max-width: 520px;
   }
 
   .section {
